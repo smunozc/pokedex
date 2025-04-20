@@ -1,0 +1,44 @@
+import { Description } from '../../common-interfaces/description';
+import { FlavorText } from '../../common-interfaces/flavor-text';
+import { Name } from '../../common-interfaces/name';
+import { EvolutionChain } from '../../evolution/evolution-chains/evolution-chain';
+import { Generation } from '../../games/generation';
+import { EggGroup } from '../egg-groups/egg-group';
+import { GrowthRate } from '../growth-rates/growth-rate';
+import { PokemonColor } from '../pokemon-colors/pokemon-color';
+import { PokemonHabitat } from '../pokemon-habitats/pokemon-habitat';
+import { PokemonShape } from '../pokemon-shapes/pokemon-shape';
+import { Genus } from './genus';
+import { PalParkEncounterArea } from './pal-park-encounter-area';
+import { PokemonSpeciesDexEntry } from './pokemon-species-dex-entry';
+import { PokemonSpeciesVariety } from './pokemon-species-variety';
+
+export interface PokemonSpecies {
+    id: number;
+    name: string;
+    order: number;
+    gender_rate: number;
+    capture_rate: number;
+    base_happiness: number;
+    is_baby: boolean;
+    is_legendary: boolean;
+    is_mythical: boolean;
+    hatch_counter: number;
+    has_gender_differences: boolean;
+    forms_switchable: boolean;
+    growth_rate: GrowthRate;
+    pokedex_numbers: Array<PokemonSpeciesDexEntry>;
+    egg_groups: Array<EggGroup>;
+    color: PokemonColor;
+    shape: PokemonShape;
+    evolves_from_species: PokemonSpecies;
+    evolution_chain: EvolutionChain;
+    habitat: PokemonHabitat;
+    generation: Generation;
+    names: Array<Name>;
+    pal_park_encounters: Array<PalParkEncounterArea>;
+    flavor_text_entries: Array<FlavorText>;
+    form_descriptions: Array<Description>;
+    genera: Array<Genus>;
+    varieties: Array<PokemonSpeciesVariety>;
+}

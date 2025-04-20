@@ -1,0 +1,43 @@
+$gradient: linear-gradient(to right, red, #ffa500, yellow, green, blue, indigo, violet, red);
+$gradient-background-size: 500% 100%;
+$gradient-animation: gradient-animation 30s linear infinite alternate;
+$input-padding-x: 24px;
+$outline-transition-duration: 0.08s;
+$search-button-transition-duration: 2s;
+
+.input-padding {
+    padding: 0 $input-padding-x;
+}
+
+.outline-style {
+    background: white;
+    transition: padding $outline-transition-duration ease-in-out;
+}
+
+.outline-active {
+    background: $gradient;
+    background-size: $gradient-background-size;
+    animation: $gradient-animation;
+    padding: 2px;
+}
+
+.outline-active::after {
+    content: '\00a0';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: $gradient;
+    background-size: 500% 100%;
+    animation: $gradient-animation;
+    border-radius: inherit;
+    filter: blur(8px);
+    opacity: 0.8; 
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+@keyframes gradient-animation {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 0%; }
+}
