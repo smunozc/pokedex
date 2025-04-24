@@ -1,16 +1,23 @@
 <div class="w-full h-full flex justify-center" [ngClass]="getSearchBarAlignmentClass()">
     <div class="w-[90%] h-16 max-w-xl p-0 rounded-full outline-style relative"
-    [ngClass]="{'outline-active': inputFocused}">
+    [ngClass]="{'outline-active': inputFocused, 'outline-active-brighter': inputFocused && theme === 'dark'}">
         <input type="text"
-        class="w-full h-full input-padding rounded-full bg-white
-        text-black outline-none"
-        [placeholder]="searchBarPlaceHolder"
-        [ngClass]="{'inset-shadow-md': inputFocused, 'shadow-md': !inputFocused}"
-        (focus)="inputFocused = true"
-        (blur)="inputFocused = false">
-        <button class="absolute right-[0.5rem] top-[0.7rem] text-gray-400 w-[10%]">
-            <mat-icon class="mt-[0.5rem] cursor-pointer search-button-style"
-            style="font-size: 26px;">search</mat-icon>
+                class="w-full h-full input-padding rounded-full bg-white
+                text-black outline-none"
+                [formControl]="searchFormControl"
+                [placeholder]="searchBarPlaceHolder"
+                [ngClass]="{'inset-shadow-md': inputFocused, 'shadow-md': !inputFocused}"
+                (focus)="inputFocused = true"
+                (blur)="inputFocused = false"
+                (keydown.enter)="search()">
+        <button class="absolute right-[1.5rem] top-[0.7rem]"
+                [ngClass]="{'text-gray-400 cursor-pointer': searchFormControl.valid, 'text-gray-300': searchFormControl.invalid}"
+                [disabled]="searchFormControl.invalid"
+                (click)="search()">
+            <mat-icon class="mt-[0.5rem] search-button-style" 
+                    style="font-size: 26px;">
+                search
+            </mat-icon>
         </button>
     </div>
 </div>

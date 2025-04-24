@@ -2,7 +2,7 @@ import { GenerationGameIndex } from '../../common-interfaces/generation-game-ind
 import { Name } from '../../common-interfaces/name';
 import { Generation } from '../../games/generation';
 import { MoveDamageClass } from '../../moves/move-damage-classes/move-damage-class';
-import { Move } from '../../pokemon-moves/move';
+import { Move } from '../../moves/move';
 import { TypePokemon } from './type-pokemon';
 import { TypeRelationsPast } from './type-realtions-past';
 import { TypeRelations } from './type-relations';

@@ -1,5 +1,5 @@
 import { Region } from '../locations/region';
-import { MoveLearnMethod } from '../pokemon-moves/move-learn-method';
+import { MoveLearnMethod } from '../moves/move-learn-method';
 import { Generation } from './generation';
 import { Pokedex } from './pokedex';
 import { Version } from './version';

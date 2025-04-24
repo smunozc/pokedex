@@ -1,6 +1,6 @@
 import { PokemonForm } from './pokemon-forms/pokemon-form';
 import { PokemonAbility } from './abilities/pokemon-ability';
-import { PokemonMove } from '../pokemon-moves/pokemon-move';
+import { PokemonMove } from '../moves/pokemon-move';
 import { PokemonSpecies } from './pokemon-species/pokemon-species';
 import { VersionGameIndex } from '../common-interfaces/version-game-index';
 import { PokemonHeldItem } from './pokemon-held-item';

@@ -1,6 +1,6 @@
 import { Description } from '../../common-interfaces/description';
 import { Name } from '../../common-interfaces/name';
-import { Move } from '../../pokemon-moves/move';
+import { Move } from '../../moves/move';
 
 export interface MoveDamageClass {
     id: number;

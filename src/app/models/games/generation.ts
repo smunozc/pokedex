@@ -1,7 +1,7 @@
 import { Name } from '../common-interfaces/name';
 import { Region } from '../locations/region';
 import { Ability } from '../pokemon/abilities/ability';
-import { Move } from '../pokemon-moves/move';
+import { Move } from '../moves/move';
 import { PokemonSpecies } from '../pokemon/pokemon-species/pokemon-species';
 import { Type } from '../pokemon/types/type';
 import { VersionGroup } from './version-group';

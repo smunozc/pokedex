@@ -1,4 +1,4 @@
-import { Move } from '../../pokemon-moves/move';
+import { Move } from '../../moves/move';
 
 export interface MoveStatAffect {
     change: number;

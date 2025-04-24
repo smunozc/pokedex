@@ -7,10 +7,10 @@ import { Pokemon } from '../models/pokemon/pokemon';
   providedIn: 'root'
 })
 export class PokeApiService {
-  private readonly apiPath = 'https://pokeapi.co/api/v2/';
+  private readonly apiPath = 'https://pokeapi.co/api/v2';
   readonly pokemon: Subject<Pokemon> = new Subject<Pokemon>();
 
-  constructor(readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   getPokemonDetails(name: string): void {
     this.http.get<Pokemon>(this.apiPath + `/pokemon/${name}`)

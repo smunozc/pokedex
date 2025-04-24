@@ -1,6 +1,6 @@
 import { Item } from '../../items/item/item';
 import { Location } from '../../locations/location';
-import { Move } from '../../pokemon-moves/move';
+import { Move } from '../../moves/move';
 import { PokemonSpecies } from '../../pokemon/pokemon-species/pokemon-species';
 import { Type } from '../../pokemon/types/type';
 import { EvolutionTrigger } from '../evolution-triggers/evolution-trigger';

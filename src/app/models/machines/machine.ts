@@ -1,6 +1,6 @@
 import { VersionGroup } from '../games/version-group';
 import { Item } from '../items/item/item';
-import { Move } from '../pokemon-moves/move';
+import { Move } from '../moves/move';
 
 export interface Machine {
     id: number;

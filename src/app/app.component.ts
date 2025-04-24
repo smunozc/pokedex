@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MenuComponent } from './components/menu/menu.component';
 
@@ -7,8 +7,7 @@ import { MenuComponent } from './components/menu/menu.component';
   standalone: true,
   imports: [RouterOutlet, MenuComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
-  encapsulation: ViewEncapsulation.None
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   
