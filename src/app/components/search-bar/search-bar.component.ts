@@ -1,9 +1,16 @@
-import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 
 @Component({
   selector: 'search-bar',
@@ -16,11 +23,23 @@ import { MatIconModule } from '@angular/material/icon';
     ReactiveFormsModule
   ],
   templateUrl: './search-bar.component.html',
-  styleUrl: './search-bar.component.scss'
+  styleUrl: './search-bar.component.scss',
+  animations: [
+    trigger('showClearButton', [
+      state('show', style({
+        right: '4.6rem'
+      })),
+      state('hide', style({
+        right: '*'
+      })),
+      transition('hide <=> show', [animate('0.5s ease-in-out')])
+    ])
+  ]
 })
 export class SearchBarComponent {
   @Input({required: true}) searchBarPlaceHolder!: string;
-  @Output() searchValue: EventEmitter<string> = new EventEmitter<string>();
+  @Output() search: EventEmitter<string> = new EventEmitter<string>();
+  @Output() clearSearch: EventEmitter<void> = new EventEmitter<void>();
 
   protected inputFocused: boolean = false;
   protected searchFormControl: FormControl<string|null> = new FormControl(null, Validators.required);
@@ -35,25 +54,21 @@ export class SearchBarComponent {
   }
 
   /**
-   * Get the search bar alignment class based on the window size.
-   * If the window size is less than 600px, the search bar will be aligned to the top.
-   * 
-   * @returns {string} The alignment class for the search bar.
-   * The class will be 'items-top pt-12' if the window size is less than 600px, otherwise 'items-center'.
+   * Emit the search value (if any) when the user presses Enter or clicks on the search icon.
    */
-  @HostListener('window:resize', ['$event'])
-  protected getSearchBarAlignmentClass(event?: Event): string {
-    return (event?.target as Window)?.innerWidth ?? window.innerWidth < 600
-    ? 'items-top pt-12'
-    : 'items-center';
+  protected searchValue(): void {
+    if(this.searchFormControl.valid) {
+      this.search.emit(this.searchFormControl.value || undefined);
+    }
   }
 
   /**
-   * Emit the search value (if any) when the user presses Enter or clicks on the search icon.
+   * Clear the search value when the user clicks on the clear icon.
    */
-  protected search(): void {
+  protected clearSearchValue(): void {
     if(this.searchFormControl.valid) {
-      this.searchValue.emit(this.searchFormControl.value || undefined);
+      this.searchFormControl.reset();
+      this.clearSearch.emit();
     }
   }
 }

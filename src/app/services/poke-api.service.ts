@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, take } from 'rxjs';
+import { BehaviorSubject, Subject, take } from 'rxjs';
 import { Pokemon } from '../models/pokemon/pokemon';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Pokemon } from '../models/pokemon/pokemon';
 })
 export class PokeApiService {
   private readonly apiPath = 'https://pokeapi.co/api/v2';
-  readonly pokemon: Subject<Pokemon> = new Subject<Pokemon>();
+  readonly pokemon: BehaviorSubject<Pokemon | null> = new BehaviorSubject<Pokemon | null>(null);
 
   constructor(private readonly http: HttpClient) {}
 

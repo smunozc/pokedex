@@ -1,3 +1,8 @@
-<div class="h-full w-full">
-    <search-bar [searchBarPlaceHolder]="searchBarPlaceHolder" (searchValue)="search($event)"></search-bar>
+<div class="w-full flex justify-center"
+    [ngClass]="{'items-top pt-12': isSmallScreen(), 'items-center': !isSmallScreen()}"
+    [@displayResultsAnimation]="(searchResult | async) && !isSmallScreen() ? 'displayResults' : 'default'">
+    <search-bar class="w-[90%] max-w-xl"
+                [searchBarPlaceHolder]="searchBarPlaceHolder"
+                (search)="search($event)"
+                (clearSearch)="clearSearch()"></search-bar>
 </div>

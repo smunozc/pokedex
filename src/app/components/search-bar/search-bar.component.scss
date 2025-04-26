@@ -2,15 +2,47 @@ $gradient: linear-gradient(to right, red, #ffa500, yellow, green, blue, indigo, 
 $gradient-background-size: 500% 100%;
 $gradient-animation: gradient-animation 30s linear infinite alternate;
 $input-padding-x: 24px;
-$outline-transition-duration: 0.1s;
+$outline-transition-duration: 0.08s;
 $search-button-transition-duration: 2s;
 
 .input-padding {
     padding: 0 $input-padding-x;
 }
 
+// COLOR STYLES
+
+.background-surface-bright {
+    background: var(--mat-sys-surface-bright);
+}
+
+.color-on-surface-variant {
+    color: var(--mat-sys-on-surface-variant);
+}
+
+.color-surface-variant {
+    color: var(--mat-sys-surface-variant);
+}
+
+// BUTTON STYLES
+
+.input-button {
+    background: var(--mat-sys-surface-bright);
+    border-radius: 100%;
+    padding: 0.5rem;
+    top: 0.2rem;
+    right: 1rem;
+    width: 3.6rem;
+    height: 90%;
+}
+
+.input-button-hover-background:hover {
+    background: var(--mat-sys-surface-container-highest);
+}
+
+// OUTLINE STYLES
+
 .outline-style {
-    background: white;
+    background: var(--mat-sys-surface-container);
     transition: padding $outline-transition-duration ease-in-out;
 }
 
@@ -30,7 +62,7 @@ $search-button-transition-duration: 2s;
     background-size: 500% 100%;
     animation: $gradient-animation;
     border-radius: inherit;
-    filter: blur(8px) opacity(0.8);
+    filter: blur(8px) opacity(0.6);
     width: 100%;
     height: 100%;
     z-index: -1;
@@ -38,8 +70,10 @@ $search-button-transition-duration: 2s;
 
 .outline-active-brighter::after {
     @extend .outline-active, ::after;
-    filter: blur(30px) opacity(1);
+    filter: blur(24px) opacity(1);
 }
+
+// ANIMATIONS
 
 @keyframes gradient-animation {
     0% { background-position: 0% 0%; }
