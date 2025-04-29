@@ -29,10 +29,16 @@ $search-button-transition-duration: 2s;
     background: var(--mat-sys-surface-bright);
     border-radius: 100%;
     padding: 0.5rem;
+    position: absolute;
     top: 0.2rem;
     right: 1rem;
     width: 3.6rem;
     height: 90%;
+}
+
+.input-button mat-icon {
+    font-size: 26px;
+    margin-top: 0.4rem;
 }
 
 .input-button-hover-background:hover {
@@ -42,7 +48,7 @@ $search-button-transition-duration: 2s;
 // OUTLINE STYLES
 
 .outline-style {
-    background: var(--mat-sys-surface-container);
+    @extend .background-surface-bright;
     transition: padding $outline-transition-duration ease-in-out;
 }
 

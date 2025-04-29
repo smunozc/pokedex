@@ -1,37 +1,39 @@
-<div class="w-full h-16 flex flex-auto justify-center">
-    <div class=" w-full p-0 rounded-full outline-style relative"
-    [ngClass]="{'outline-active': inputFocused, 'outline-active-brighter': inputFocused && theme === 'dark'}">
-        <input type="text"
-                class="w-full h-full input-padding rounded-full background-surface-bright
-                color-on-surface-variant text-black outline-none"
-                [formControl]="searchFormControl"
-                [placeholder]="searchBarPlaceHolder"
-                [ngClass]="{'inset-shadow-md': inputFocused, 'shadow-md': !inputFocused}"
-                (focus)="inputFocused = true"
-                (blur)="inputFocused = false"
-                (keydown.enter)="searchValue()">
-        <button class="absolute input-button"
-                [ngClass]="{
-                    'color-on-surface-variant cursor-pointer input-button-hover-background': searchFormControl.valid,
-                    'color-surface-variant': searchFormControl.invalid
-                }"
-                [@showClearButton]="searchFormControl.valid ? 'show' : 'hide'"
-                [disabled]="searchFormControl.invalid"
-                (click)="clearSearchValue()">
-            <mat-icon class="mt-[0.5rem] search-button-style" 
-                    style="font-size: 26px;">
+<div class="w-full h-16 flex flex-auto p-0 rounded-full outline-style relative"
+[ngClass]="{
+    'outline-active': inputFocused,
+    'outline-active-brighter': inputFocused && theme === 'dark',
+    'inset-shadow-md': inputFocused,
+    'shadow-md': !inputFocused
+}">
+    <input type="text"
+            class="h-full input-padding rounded-l-full background-surface-bright
+            color-on-surface-variant outline-none flex-3"
+            [formControl]="searchFormControl"
+            [placeholder]="searchBarPlaceHolder"
+            (focus)="inputFocused = true"
+            (blur)="inputFocused = false"
+            (keydown.enter)="searchValue()">
+    <div class="background-surface-bright h-full flex-1 rounded-r-full">
+        <button class="input-button"
+            [ngClass]="{
+                'color-on-surface-variant cursor-pointer input-button-hover-background': searchFormControl.valid,
+                'color-surface-variant': searchFormControl.invalid
+            }"
+            [@showClearButton]="searchFormControl.valid ? 'show' : 'hide'"
+            [disabled]="searchFormControl.invalid"
+            (click)="clearSearchValue()">
+            <mat-icon>
                 close
             </mat-icon>
         </button>
-        <button class="absolute z-10 input-button"
+        <button class="input-button z-10"
                 [ngClass]="{
                     'color-on-surface-variant cursor-pointer input-button-hover-background': searchFormControl.valid,
                     'color-surface-variant': searchFormControl.invalid
                 }"
                 [disabled]="searchFormControl.invalid"
                 (click)="searchValue()">
-            <mat-icon class="mt-[0.5rem] search-button-style" 
-                    style="font-size: 26px;">
+            <mat-icon>
                 search
             </mat-icon>
         </button>

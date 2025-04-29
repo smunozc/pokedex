@@ -11,24 +11,29 @@ import {
   transition
 } from '@angular/animations';
 import { Pokemon } from '../../models/pokemon/pokemon';
+import { PokemonCardComponent } from '../../components/pokemon-card/pokemon-card.component';
 
 @Component({
   selector: 'home',
   imports: [
     SearchBarComponent,
-    CommonModule
-  ],
+    CommonModule,
+    PokemonCardComponent
+],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   animations: [
-    trigger('displayResultsAnimation', [
-      state('default', style({
-        height: '100%'
+    trigger('searchBarAnimation', [
+      state('true', style({
+        top: '2rem'
       })),
-      state('displayResults', style({
-        height: '10rem'
+      transition('* <=> true', [animate('0.5s ease-in-out')])
+    ]),
+    trigger('resultsAnimation', [
+      state('true', style({
+        top: '10rem'
       })),
-      transition('default <=> displayResults', [animate('0.5s ease-in-out')])
+      transition('* <=> true', [animate('0.55s ease-in-out')])
     ])
   ]
 })
