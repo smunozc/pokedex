@@ -1,11 +1,10 @@
-<div class="w-full h-full flex justify-center relative overflow-hidden">
+<div class="w-full h-full flex justify-center relative overflow-y-hidden">
     <search-bar class="w-[90%] max-w-xl absolute"
                 [ngClass]="{'top-[2rem]': isSmallScreen(), 'top-[calc(50%-2rem)]': !isSmallScreen()}"
                 [@searchBarAnimation]="(searchResult | async) && !isSmallScreen()"
                 [searchBarPlaceHolder]="searchBarPlaceHolder"
-                (search)="search($event)"
-                (clearSearch)="clearSearch()"></search-bar>
-    <div class="w-full absolute top-[100%]"
+                (search)="search($event)"></search-bar>
+    <div class="w-[90%] max-w-xl absolute top-[100%]"
         [@resultsAnimation]="!!(searchResult | async)">
         <pokemon-card [pokemon]="searchResult | async"></pokemon-card>
     </div>

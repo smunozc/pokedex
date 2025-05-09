@@ -39,7 +39,6 @@ import {
 export class SearchBarComponent {
   @Input({required: true}) searchBarPlaceHolder!: string;
   @Output() search: EventEmitter<string> = new EventEmitter<string>();
-  @Output() clearSearch: EventEmitter<void> = new EventEmitter<void>();
 
   protected inputFocused: boolean = false;
   protected searchFormControl: FormControl<string|null> = new FormControl(null, Validators.required);
@@ -68,7 +67,6 @@ export class SearchBarComponent {
   protected clearSearchValue(): void {
     if(this.searchFormControl.valid) {
       this.searchFormControl.reset();
-      this.clearSearch.emit();
     }
   }
 }

@@ -1,9 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Pokemon } from '../../models/pokemon/pokemon';
+import { MatCardModule } from '@angular/material/card';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'pokemon-card',
-  imports: [],
+  imports: [
+    MatCardModule,
+    MatButton
+  ],
   templateUrl: './pokemon-card.component.html',
   styleUrl: './pokemon-card.component.scss'
 })

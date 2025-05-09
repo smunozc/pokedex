@@ -2,7 +2,7 @@ import { Component, HostListener, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 import { PokeApiService } from '../../services/poke-api.service';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import {
   trigger,
   state,
@@ -33,13 +33,13 @@ import { PokemonCardComponent } from '../../components/pokemon-card/pokemon-card
       state('true', style({
         top: '10rem'
       })),
-      transition('* <=> true', [animate('0.55s ease-in-out')])
+      transition('* <=> true', [animate('0.5s ease-in-out')])
     ])
   ]
 })
 export class HomeComponent implements OnDestroy {
   protected readonly searchBarPlaceHolder: string = "¿Qué Pokémon buscas?"
-  protected searchResult: Subject<Pokemon | null> = this.pokeApiService.pokemon;
+  protected searchResult: BehaviorSubject<Pokemon | null> = this.pokeApiService.pokemon;
 
   constructor(private readonly pokeApiService: PokeApiService) {}
 
@@ -49,10 +49,6 @@ export class HomeComponent implements OnDestroy {
 
   protected search(searchValue: string): void {
     this.pokeApiService.getPokemonDetails(searchValue);
-  }
-
-  protected clearSearch(): void {
-    this.searchResult.next(null);
   }
   
   /**
