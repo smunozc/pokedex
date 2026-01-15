@@ -2,7 +2,7 @@ import { Component, HostListener, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 import { PokeApiService } from '../../services/poke-api.service';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import {
   trigger,
   state,
@@ -38,7 +38,7 @@ import { PokemonCardComponent } from '../../components/pokemon-card/pokemon-card
   ]
 })
 export class HomeComponent implements OnDestroy {
-  protected readonly searchBarPlaceHolder: string = "¿Qué Pokémon buscas?"
+  protected readonly searchBarPlaceHolder: string = "¿What pokemon are you looking for?"
   protected searchResult: BehaviorSubject<Pokemon | null> = this.pokeApiService.pokemon;
 
   constructor(private readonly pokeApiService: PokeApiService) {}
@@ -47,6 +47,12 @@ export class HomeComponent implements OnDestroy {
     this.searchResult.complete();
   }
 
+  /**
+   * Search for a Pokémon by its name.
+   * This method uses the PokeApiService to fetch the details of the Pokémon.
+   * This method is called when the user submits a search in the search bar.
+   * @param searchValue The value to search for in the Pokémon API.
+   */
   protected search(searchValue: string): void {
     this.pokeApiService.getPokemonDetails(searchValue);
   }

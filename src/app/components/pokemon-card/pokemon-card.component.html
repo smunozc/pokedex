@@ -1,7 +1,7 @@
 <mat-card class="max-width[400px]" appearance="outlined">
     <mat-card-header>
         <div mat-card-avatar>
-            <img mat-card-image [src]="pokemon?.sprites?.front_default" alt="Pokemon sprite">
+            <img mat-card-image [src]="pokemon?.sprites?.front_default" class="w-[10rem] " alt="Pokemon sprite">
         </div>
         <mat-card-title>{{ pokemon?.name }}</mat-card-title>
         <mat-card-subtitle>
@@ -19,6 +19,6 @@
         }
     </mat-card-content>
     <mat-card-actions>
-        <button mat-button>LIKE</button>
+        <button mat-button>BUTTON</button>
     </mat-card-actions>
 </mat-card>
