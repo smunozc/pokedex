@@ -24,6 +24,7 @@ export interface Pokemon {
 	held_items: Array<PokemonHeldItem>;
 	location_area_encounters: string;
 	moves: Array<PokemonMove>;
+	past_abilities: Array<any>;
 	past_types: Array<PokemonTypePast>;
 	sprites: PokemonSprites;
 	cries: PokemonCries;

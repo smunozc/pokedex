@@ -7,4 +7,6 @@ export interface PokemonSprites {
     back_shiny: string;
     back_female: string;
     back_shiny_female: string;
+    other?: any;
+    versions?: any;
 }
