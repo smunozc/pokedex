@@ -4,7 +4,7 @@
                 [@searchBarAnimation]="(searchResult | async) && !isSmallScreen()"
                 [searchBarPlaceHolder]="searchBarPlaceHolder"
                 (search)="search($event)"></search-bar>
-    <div class="w-[90%] max-w-xl absolute top-[100%]"
+    <div class="w-[90%] max-w-xl absolute top-[100%] flex justify-center"
         [@resultsAnimation]="!!(searchResult | async)">
         <pokemon-card [pokemon]="searchResult | async"></pokemon-card>
     </div>

@@ -24,8 +24,11 @@ The application follows a standard Angular component-based architecture, utilizi
 - `AppComponent` is the root.
 - `HomeComponent` acts as the main page container.
 - `SearchBarComponent` allows user input to trigger searches.
-- `PokemonCardComponent` displays individual Pokemon data.
+- `PokemonCardComponent` displays individual Pokemon data using a trading card visual metaphor.
 
 ## Design Decisions
 - **Angular Animations**: Used for UI transitions (e.g., search bar movement).
-- **Responsive Design**: HostListeners and conditional styling used to adapt to screen sizes.
+- **Styling**: 
+  - Mixed approach: SCSS for layout/global styles, and **Tailwind CSS** (utility-first) for complex component designs like the Pokemon Card.
+  - "Trading Card" aesthetic for data presentation.
+- **Responsive Design**: HostListeners, conditional styling, and Tailwind responsive prefixes (`md:`, `lg:`) used to adapt to screen sizes.
