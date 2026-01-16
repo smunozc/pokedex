@@ -1,18 +1,20 @@
 # Active Context
 
 ## Current Focus
-Initializing the Memory Bank documentation to ensure project continuity and clear context for future development sessions.
+Managing the project's repository and ensuring changes are properly committed and pushed.
 
 ## Recent Changes
 - Created `projectbrief.md`
 - Created `productContext.md`
 - Created `systemPatterns.md`
 - Created `techContext.md`
+- Committed model fixes in `src/app/models/pokemon/pokemon-sprites.ts` and `src/app/models/pokemon/pokemon.ts`.
+- Merged Pull Request #1 "Model fixes".
 
 ## Next Steps
-- Complete Memory Bank creation (`progress.md`, `activeContext.md`).
-- Await further instructions from the user regarding feature development or refactoring.
+- Continue development based on further requirements.
 
 ## Active Decisions
 - Adopting the standard Memory Bank structure to maintain project context.
 - Using Markdown for all documentation to keep it close to the code.
+- Using feature branches for changes.

@@ -1,11 +1,12 @@
 # Progress
 
 ## Status
-Project is in active development. Basic structure and core functionality (searching and displaying Pokemon) appear to be implemented. Memory Bank documentation has been initialized.
+Project is in active development. Basic structure and core functionality (searching and displaying Pokemon) appear to be implemented. Memory Bank documentation has been initialized. Model fixes have been merged.
 
 ## What Works
 - **Project Structure**: Angular v19 project set up with standalone components.
 - **Data Models**: Comprehensive set of TypeScript interfaces for PokeAPI responses.
+  - *Recent Update*: Fixes applied to `Pokemon` and `PokemonSprites` models (PR #1 merged).
 - **Core Components**:
   - `HomeComponent`: Main container.
   - `SearchBarComponent`: User input for search.
