@@ -1,24 +1,96 @@
-<mat-card class="max-width[400px]" appearance="outlined">
-    <mat-card-header>
-        <div mat-card-avatar>
-            <img mat-card-image [src]="pokemon?.sprites?.front_default" class="w-[10rem] " alt="Pokemon sprite">
+<div class="relative w-72 h-[26rem] rounded-xl p-3 shadow-xl transition-transform hover:scale-105 duration-300 bg-white dark:bg-slate-800 border-[10px]"
+     [style.borderColor]="getPrimaryTypeColor()">
+
+  <!-- Header -->
+  <div class="flex justify-between items-end mb-2 px-1">
+    <div class="flex flex-col">
+      <!-- Stage label could go here -->
+      <div class="font-['Kanit'] font-bold text-xl capitalize text-slate-800 dark:text-slate-100 leading-none">
+        {{ pokemon?.name }}
+      </div>
+    </div>
+    
+    <div class="flex items-center gap-1">
+      <span class="font-['Kanit'] font-bold text-red-600 dark:text-red-400 text-xs pt-1">HP</span>
+      <span class="font-['Kanit'] font-bold text-slate-900 dark:text-slate-100 text-2xl leading-none">{{ getHp() }}</span>
+      @if (pokemon?.types?.length) {
+        <!-- Type Symbol (Energy Style) -->
+        <div class="w-6 h-6 ml-0.5 rounded-full flex items-center justify-center shadow-sm"
+             [style.backgroundColor]="getPrimaryTypeColor()">
+          <img [src]="'assets/types/' + pokemon?.types![0].type.name + '.svg'" 
+               class="w-4 h-4 drop-shadow-sm" 
+               [alt]="pokemon?.types![0].type.name">
         </div>
-        <mat-card-title>{{ pokemon?.name }}</mat-card-title>
-        <mat-card-subtitle>
-            @for (type of pokemon?.types; track $index) {
-                {{ type.type.name }}
-            }
-        </mat-card-subtitle>
-    </mat-card-header>
-    <img class="w-60 place-self-center" mat-card-image [src]="pokemon?.sprites?.front_default" alt="Pokemon sprite">
-    <mat-card-content>
-        @for (ability of pokemon?.abilities; track $index) {
-            <p>
-                {{ ability.ability.name }}
-            </p>
-        }
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-button>BUTTON</button>
-    </mat-card-actions>
-</mat-card>
+      }
+    </div>
+  </div>
+
+  <!-- Image Area -->
+  <div class="relative w-full h-40 border-4 border-slate-300 bg-slate-100 shadow-inner flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 to-slate-200 mx-auto">
+    <img [src]="pokemon?.sprites?.front_default" 
+         class="w-36 h-36 object-contain drop-shadow-lg z-10 transition-transform hover:scale-110 duration-500" 
+         alt="Pokemon sprite">
+    
+    <!-- Decorative background splash -->
+    <div class="absolute w-32 h-32 rounded-full opacity-20 blur-xl"
+         [style.backgroundColor]="getPrimaryTypeColor()">
+    </div>
+  </div>
+
+  <!-- Info Strip -->
+  <div class="bg-gradient-to-r from-yellow-200 via-yellow-100 to-yellow-200 dark:from-slate-700 dark:via-slate-600 dark:to-slate-700 my-2 px-2 py-0.5 shadow-sm flex justify-center gap-4 text-[10px] font-['Kanit'] font-semibold text-slate-700 dark:text-slate-200 italic border-y border-yellow-300 dark:border-slate-500">
+    <span>HT: {{ (pokemon?.height || 0) / 10 }}m</span>
+    <span>WT: {{ (pokemon?.weight || 0) / 10 }}kg</span>
+  </div>
+
+  <!-- Abilities / Content -->
+  <div class="space-y-3 mt-4 px-1">
+    <div class="flex flex-col gap-2">
+      @for (ability of pokemon?.abilities?.slice(0, 2); track $index) {
+        <div class="flex items-center gap-2">
+           <!-- Ability cost (using type icon as proxy) -->
+           <div class="flex gap-0.5 min-w-[2rem] justify-center">
+             <div class="w-4 h-4 rounded-full flex items-center justify-center shadow-sm"
+                  [style.backgroundColor]="getPrimaryTypeColor()">
+               <img [src]="'assets/types/' + (pokemon?.types?.[0]?.type?.name || 'normal') + '.svg'" 
+                    class="w-3 h-3 drop-shadow-sm">
+             </div>
+             @if ($index > 0) { 
+               <div class="w-4 h-4 rounded-full flex items-center justify-center shadow-sm bg-slate-300 dark:bg-slate-500">
+                 <img [src]="'assets/types/normal.svg'" 
+                      class="w-3 h-3 drop-shadow-sm">
+               </div>
+             }
+           </div>
+           
+           <div class="flex flex-col leading-tight">
+             <span class="font-['Kanit'] font-bold text-sm text-slate-800 dark:text-slate-200 capitalize">
+               {{ ability.ability.name.replace('-', ' ') }}
+             </span>
+             <span class="text-[10px] text-slate-500 dark:text-slate-400">
+               Pokemon Ability
+             </span>
+           </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Bottom Stats (Weakness/Retreat) -->
+  <div class="absolute bottom-2 left-3 right-3 flex justify-between text-[10px] text-slate-500 dark:text-slate-400 font-['Kanit'] pt-1 border-t border-slate-200 dark:border-slate-700">
+    <div class="flex gap-1 items-center">
+        <span class="font-bold">weakness</span>
+        <!-- Placeholder logic for weakness could be added -->
+    </div>
+    <div class="flex gap-1 items-center">
+        <span class="font-bold">retreat</span>
+        <div class="w-3 h-3 rounded-full flex items-center justify-center shadow-sm bg-slate-300 dark:bg-slate-500">
+            <img src="assets/types/normal.svg" class="w-2.5 h-2.5 drop-shadow-sm">
+        </div>
+    </div>
+  </div>
+  
+  <!-- Holographic sheen effect overlay -->
+  <div class="absolute inset-0 rounded-xl bg-gradient-to-tr from-white/20 via-transparent to-black/5 pointer-events-none mix-blend-overlay"></div>
+
+</div>
