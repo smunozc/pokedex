@@ -79,6 +79,39 @@ $search-button-transition-duration: 2s;
     filter: blur(24px) opacity(1);
 }
 
+// AUTOCOMPLETE PANEL
+::ng-deep .search-bar-panel {
+    background-color: var(--mat-sys-surface-bright) !important;
+    border-radius: 2rem !important; // Match bar radius
+    
+    // Position to tuck behind the search bar
+    margin-top: -16px !important;
+    padding-top: 16px !important;
+    
+    // Clean styling (no border/glow)
+    border: none !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+    max-height: none !important;
+
+    // Inner scroll container
+    .panel-scroll-container {
+        max-height: 256px;
+        overflow-y: auto;
+        width: 100%;
+    }
+
+    // Ensure options text color matches theme
+    .mat-mdc-option {
+        color: var(--mat-sys-on-surface-variant) !important;
+        
+        // Optional: Hover state
+        &:hover {
+             background-color: var(--mat-sys-surface-container-highest);
+        }
+    }
+}
+
 // ANIMATIONS
 
 @keyframes gradient-animation {

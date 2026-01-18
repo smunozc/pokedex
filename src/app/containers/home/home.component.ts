@@ -1,8 +1,8 @@
-import { Component, HostListener, OnDestroy } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 import { PokeApiService } from '../../services/poke-api.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import {
   trigger,
   state,
@@ -37,14 +37,24 @@ import { PokemonCardComponent } from '../../components/pokemon-card/pokemon-card
     ])
   ]
 })
-export class HomeComponent implements OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy {
   protected readonly searchBarPlaceHolder: string = "¿What pokemon are you looking for?"
   protected searchResult: BehaviorSubject<Pokemon | null> = this.pokeApiService.pokemon;
+  protected showCard: boolean = false;
+  private pokemonSubscription?: Subscription;
 
   constructor(private readonly pokeApiService: PokeApiService) {}
 
+  ngOnInit(): void {
+    this.pokemonSubscription = this.searchResult.subscribe(pokemon => {
+      if (pokemon) {
+        this.showCard = true;
+      }
+    });
+  }
+
   ngOnDestroy(): void {
-    this.searchResult.complete();
+    this.pokemonSubscription?.unsubscribe();
   }
 
   /**
@@ -54,9 +64,13 @@ export class HomeComponent implements OnDestroy {
    * @param searchValue The value to search for in the Pokémon API.
    */
   protected search(searchValue: string): void {
-    this.pokeApiService.getPokemonDetails(searchValue);
+    if (searchValue) {
+      this.pokeApiService.getPokemonDetails(searchValue);
+    } else {
+      this.showCard = false;
+    }
   }
-  
+
   /**
    * Check if the screen is small (less than 600px) and return true or false.
    * This method is used to determine if the search bar should be displayed at the center or top of the screen.

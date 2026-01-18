@@ -4,6 +4,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { PokeApiService } from '../../services/poke-api.service';
+import { NamedAPIResource } from '../../models/common-interfaces/named-api-resource';
+import { Observable, combineLatest, map, startWith } from 'rxjs';
 import {
   trigger,
   state,
@@ -20,7 +24,8 @@ import {
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatAutocompleteModule
   ],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss',
@@ -43,13 +48,29 @@ export class SearchBarComponent {
   protected inputFocused: boolean = false;
   protected searchFormControl: FormControl<string|null> = new FormControl(null, Validators.required);
   protected theme: string;
+  protected filteredOptions: Observable<NamedAPIResource[]> | undefined;
 
-  constructor() {
+  constructor(private readonly pokeApiService: PokeApiService) {
     // Get system theme preference
     this.theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
       this.theme = event.matches ? 'dark' : 'light';
     });
+
+    this.filteredOptions = combineLatest([
+      this.searchFormControl.valueChanges.pipe(startWith('')),
+      this.pokeApiService.pokemonList
+    ]).pipe(
+      map(([value, pokemonList]) => this._filter(value || '', pokemonList))
+    );
+  }
+
+  private _filter(value: string, pokemonList: NamedAPIResource[]): NamedAPIResource[] {
+    if (value.length < 3) {
+      return [];
+    }
+    const filterValue = value.toLowerCase();
+    return pokemonList.filter(option => option.name.toLowerCase().includes(filterValue));
   }
 
   /**
@@ -67,6 +88,7 @@ export class SearchBarComponent {
   protected clearSearchValue(): void {
     if(this.searchFormControl.valid) {
       this.searchFormControl.reset();
+      this.search.emit('');
     }
   }
 }
