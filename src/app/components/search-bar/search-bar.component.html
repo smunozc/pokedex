@@ -1,18 +1,32 @@
-<div class="w-full h-16 flex flex-auto p-0 rounded-full outline-style relative"
-[ngClass]="{
-    'outline-active': inputFocused,
-    'outline-active-brighter': inputFocused && theme === 'dark',
-    'inset-shadow-md': inputFocused,
-    'shadow-md': !inputFocused
-}">
+<div class="w-full h-16 flex flex-auto p-0 rounded-full outline-style relative z-[2000]"
+    matAutocompleteOrigin #origin="matAutocompleteOrigin"
+    [ngClass]="{
+        'outline-active': inputFocused,
+        'outline-active-brighter': inputFocused && theme === 'dark',
+        'inset-shadow-md': inputFocused,
+        'shadow-md': !inputFocused,
+        'search-bar-open': trigger.panelOpen
+    }">
     <input type="text"
             class="h-full input-padding rounded-l-full background-surface-bright
             color-on-surface-variant outline-none flex-3"
             [formControl]="searchFormControl"
             [placeholder]="searchBarPlaceHolder"
+            [matAutocomplete]="auto"
+            [matAutocompleteConnectedTo]="origin"
+            #trigger="matAutocompleteTrigger"
             (focus)="inputFocused = true"
             (blur)="inputFocused = false"
             (keydown.enter)="searchValue()">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="searchValue()" class="search-bar-panel">
+        <div class="panel-scroll-container">
+            @for (option of filteredOptions | async; track option.name) {
+                <mat-option [value]="option.name">
+                    {{option.name}}
+                </mat-option>
+            }
+        </div>
+    </mat-autocomplete>
     <div class="background-surface-bright h-full flex-1 rounded-r-full">
         <button class="input-button"
             [ngClass]="{
